@@ -1,0 +1,146 @@
+body{
+    font-size: 16px;
+    background: white;
+}
+label{
+    font-size: 16px;
+}
+
+/*flashbag*/
+.box-flash{
+    margin: 0px auto;
+    float: none;
+    padding-top: 0px;
+
+}
+
+.borde-10{
+    border-radius: 10px 10px 10px 10px;
+}
+
+/*nabvar*/
+.navbar-inverse{
+    background-color: #0C6FF2;
+}
+.navbar-inverse .navbar-nav > .active > a{
+    color: #ffffff;
+    background-color: #008eff;
+}
+
+.navbar-collapse .avatar{
+    background: white;
+    border-radius: 500px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    float: left;
+    margin-right: 12px;
+    margin-top: -7px;
+    
+}
+
+.navbar-collapse .avatar img{
+    height: 100%;
+    text-align: center;
+}
+
+/*formulario registro de usuario*/
+.box-form{
+    background: #F2F2F2;
+    border: 1px solid #0C6FF2;
+    padding: 20px;
+    margin: 0px auto;
+    float: none;
+    padding-top: 0px;
+    border-radius: 10px 10px 10px 10px;
+}
+.pad-top{
+    padding-top: 10px;
+}
+.box-form input{
+    margin-bottom: 10px;
+}
+
+/*footer*/
+
+.footer {
+    background-color: #0C6FF2;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+blockquote > p {
+    color: #F2F2F2;
+}
+
+blockquote > small{
+    color: #F2F2F2;
+}
+
+blockquote {
+    padding: 11.5px 23px;
+    margin: 0 0 23px;
+    font-size: 16.25px;
+    border-left: 5px solid #F2F2F2;
+}
+
+/*pagina de inicio*/
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+.conjunto {
+    border-top: 3px solid #1911a14d;
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: rgba(25, 17, 161, 0.3);
+}
+
+.conjunto2 {
+    border-top: 2px solid #1911a14d;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgba(64, 112, 223, 0.14);
+}
+
+.conjunto3 {
+    border-top: 2px solid #1911a14d;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgba(64, 112, 223, 0.44);
+}
