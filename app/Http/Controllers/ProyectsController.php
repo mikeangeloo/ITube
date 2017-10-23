@@ -11,7 +11,7 @@ class ProyectsController extends Controller
     public function calcularTrayectoria(){
         //print_r($_POST);
 
-         $html = '<h3>Para este trayecto es recomendable utilzar:</h3>';
+         $html = '<h3>Para este trayecto es recomendable utilizar:</h3>';
 
          $external_diameter = $_POST['cable_diameter'];
          $num_cables = $_POST['cables_amount'];
@@ -27,9 +27,15 @@ class ProyectsController extends Controller
         $querry = new Proyects();
         $result = $querry->callSerachTubesProcedure($totalareaCables,$num_cables,$idSelectedMaterial,$isForniture);
 
-        foreach ($result as $_result) {
-            $html .= '<textarea disabled>'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.'mm^2'."\n" .'Total de cables:'.$num_cables."\n\r".'</textarea>';
+        if(!empty($result)){
+            foreach ($result as $_result) {
+                $html .= '<textarea block>'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$num_cables."\n\r".'</textarea>';
+            }
+        }else{
+            $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';
         }
+
+
         return $html;
 
     }

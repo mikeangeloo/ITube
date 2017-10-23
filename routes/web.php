@@ -12,13 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/tube_types', 'Tubes_TypesController@select_allTubeTypes');
 Route::get('/tubes/{id}', 'TubesController@selectTubes');
 Route::get('/cables_types', 'Cable_TypesController@selectAllCableTypes');
