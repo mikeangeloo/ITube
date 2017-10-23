@@ -17,8 +17,9 @@ class CreateCablesTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('cables_types_id')->index('fk_cables_cables_types');
 			$table->string('description', 100)->nullable();
-			$table->timestamps();
 			$table->float('external_diameter', 5)->unsigned()->nullable();
+			$table->timestamps();
+
 		});
 	}
 

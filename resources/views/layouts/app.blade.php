@@ -7,6 +7,14 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {!! Html::style('css/bootstrap.min.css') !!}
+    {!! Html::style('css/bootstrap.paper.min.css') !!}
+    {!! Html::style('css/styles.css') !!}
+
+
+    {!! Html::script('js/jquery.min.js') !!}
+    {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
+    {!! Html::script('js/ajaxCalls.js') !!}
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -51,7 +59,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -75,6 +83,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    {!! Html::script('js/app.js') !!}
+
 </body>
 </html>

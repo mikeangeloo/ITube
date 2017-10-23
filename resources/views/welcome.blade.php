@@ -6,9 +6,9 @@
     <div class="container">
         <div class="col-xs-12">
             <h2>Calcular Trayectorias</h2>
-            <button class="btn btn-info text-right">Calcular</button>
 
-                <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</button>
+
+                <button class="btn btn-success" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</button>
 
                 <button class="btn btn-warning" href="#" role="button" id="reiniciar">
                     <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
@@ -21,13 +21,15 @@
         </div>
 
 
-        <form class="">
+        <form class="" name="formulario" id="formulario" action="calcular" method="POST">
+            {{ csrf_field() }}
+            <button class="btn btn-info text-right" type="button" name="calcular" id="calcular">Calcular</button>
             <div class="col-sm-12 col-xs-12">
-                <div class="class col-sm-12">
+                <div class="col-sm-12">
                     <h4>Trayectoria</h4>
                 </div>
                 <div class="col-xs-12 col-sm-3">
-                    <label for="tubes_id">Material a utilizar:</label>
+                    <label for="material">Material a utilizar:</label>
                     <select class="form-control" name="material" id="material">
                         <option value="0" selected>---</option>
                         <option value="1">Tubos</option>
@@ -36,17 +38,17 @@
                     </select>
                 </div>
                 <div class="col-xs-12 col-sm-3" name="ajaxSelect" id="ajaxSelect">
-                    <label for="cable_id">Categoría</label>
+                    <label for="selected_material">Categoría</label>
                     <select class="form-control" name="selected_material" id="selected_material">
 
                     </select>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <label for="tipo">Tipo:</label>
-                    <select class="form-control" name="material_type" id="material_type">
+                {{--<div class="col-xs-12 col-sm-3">--}}
+                    {{--<label for="tipo">Tipo:</label>--}}
+                    {{--<select class="form-control" name="material_type" id="material_type">--}}
 
-                    </select>
-                </div>
+                    {{--</select>--}}
+                {{--</div>--}}
                 <div class="col-xs-12 col-sm-3">
                     <label for="interior">¿Es para interior? Si:</label>
                     <input type="checkbox" name="interior" id="interior">
@@ -63,8 +65,8 @@
                     <input type="number" class="form-control" id="cables_amount" name="cables_amount" value="1" min="1">
                 </div>
                 <div class="col-xs-12 col-sm-3">
-                    <label for="tubes_id">Tipo de cable:</label>
-                    <select class="form-control" name="tubes_id" id="tubes_id">
+                    <label for="cable_type">Tipo de cable:</label>
+                    <select class="form-control" name="cable_type" id="cable_type">
 
                     </select>
                 </div>
@@ -74,16 +76,19 @@
 
                     </select>
                 </div>
+                <div class="col-xs-12 col-sm-3">
+                    <label for="cable_diameter">Diametro exterior (mm):</label>
+                    <input class="form-control" name="cable_diameter" id="cable_diameter">
+                </div>
             </div>
-
-
-
-
-
-
-
-
+            <input type="hidden" name="use_material" id="use_material">
         </form>
+
+        <div class="col-xs-12 col-sm-12" name="resultados" id="resultados">
+            <br>
+            <h3>Resultados: </h3>
+
+        </div>
     </div>
 </div>
 @endsection
