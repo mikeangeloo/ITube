@@ -22,6 +22,7 @@
 
         <form class="" name="formulario" id="formulario" action="calcular" method="POST">
             {{--<button type="submit">ddd</button>--}}
+
             {{ csrf_field() }}
 
             <div class="col-sm-12 col-xs-12">

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home',array('user'=>Auth::user()));
 });
 
 Auth::routes();
@@ -29,3 +29,6 @@ Route::post('calcular',[
     'as' => 'ProyectsController.calcularTrayectoria',
     'uses' => 'ProyectsController@calcularTrayectoria'
 ]);
+
+Route::get('user/profile','UserController@profile');
+Route::post('user/update','UserController@update');

@@ -4,6 +4,8 @@
 
 $(document).ready(function() {
 
+    $("#cable_diameter").val("");
+
     $.ajax({
         url: "/ITube/public/cables_types",
         dataType: "html",

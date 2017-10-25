@@ -33,15 +33,20 @@
 
 
                 @auth
+
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span> Inicio </a></li>
                         <li><a href="{{url('/')}}">
                                 <span class="glyphicon glyphicon-upload"></span> Crear proyecto</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span></a>
+                                <div class="avatar">
+                                    {!! Html::image("uploads/usersprofile/{$user->image}",'userimg') !!}
+                                </div>
+                                    {{ Auth::user()->name }} <span class="caret"></span></a>
+
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">
+                                <li><a href="{{url('edit-profile')}}">
                                         <span class="glyphicon glyphicon-edit"></span> Editar Perfil</a></li>
                                 <li><a href="#">
                                         <span class="glyphicon glyphicon-save"></span> Proyectos guardados</a></li>
