@@ -92,5 +92,11 @@ $(document).ready(function() {
         });
     });
 
+    $("#pdf").on('click',function(){
+        var userData = $("#formulario").serialize();
+
+        window.open('/ITube/public/pdfview?'+userData);
+    });
+
 
 });

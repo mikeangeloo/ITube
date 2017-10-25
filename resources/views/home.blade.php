@@ -1,7 +1,7 @@
 @extends('nav')
 @section('contenido')
 
-<body>
+<body xmlns="http://www.w3.org/1999/html">
 <div class="form-group row">
     <div class="container">
         <div class="col-xs-12">
@@ -9,9 +9,9 @@
 
                 <button class="btn btn-info text-right" type="button" name="calcular" id="calcular">Calcular</button>
                 <button class="btn btn-success" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar</button>
-                <button class="btn btn-warning" href="#" role="button" id="reiniciar">
-                    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-                    Reiniciar</button>
+                <button class="btn btn-warning" role="button" id="pdf" name="pdf">
+                    <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                    Exportar PDF</button>
                 <!--<a class="btn btn-warning" href="#" role="button" id="reiniciar">
                             <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                             Configuración</a>-->

@@ -29,7 +29,7 @@ class ProyectsController extends Controller
 
         if(!empty($result)){
             foreach ($result as $_result) {
-                $html .= '<textarea block>'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$num_cables."\n\r".'</textarea>';
+                $html .= '<textarea block name="respuestas" id="respuestas" value="afdasf">'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$num_cables."\n\r".'</textarea>';
             }
         }else{
             $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';
