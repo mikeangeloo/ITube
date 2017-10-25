@@ -93,9 +93,13 @@ $(document).ready(function() {
     });
 
     $("#pdf").on('click',function(){
-        var userData = $("#formulario").serialize();
+        //$("#cable_type").serialize("ddd");
 
-        window.open('/ITube/public/pdfview?'+userData);
+        $("#formulario").submit();
+        //alert(userData);
+
+
+        //window.open('/ITube/public/pdfview?'+userData);
     });
 
 

@@ -2,6 +2,7 @@
 
 namespace ITube\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,13 +10,16 @@ use Illuminate\Support\Facades\DB;
 class PDFController extends Controller
 {
     public function pdfview(Request $request){
-        $items = $_GET;
+        $items = $_POST;
 
-        view()->share('items',$items);
+        $items2 = array($items);
+
+        view()->share('items',$items2);
 
 
 
             $pdf = PDF::loadView('pdfview');
+
             return $pdf->stream('pdfview.pdf');
 
     }

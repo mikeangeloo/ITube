@@ -33,4 +33,4 @@ Route::post('calcular',[
 Route::get('user/profile','UserController@profile');
 Route::post('user/update','UserController@update');
 
-Route::get('pdfview',array('as'=>'pdfview','uses'=>'PDFController@pdfview'));
+Route::post('pdfview',array('as'=>'pdfview','uses'=>'PDFController@pdfview'));

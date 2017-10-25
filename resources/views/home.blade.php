@@ -20,7 +20,7 @@
         </div>
 
 
-        <form class="" name="formulario" id="formulario" action="calcular" method="POST">
+        <form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">
             {{--<button type="submit">ddd</button>--}}
 
             {{ csrf_field() }}
@@ -83,13 +83,14 @@
                 </div>
             </div>
             <input type="hidden" name="use_material" id="use_material">
+            <div class="col-xs-12 col-sm-12" name="resultados" id="resultados">
+                <br>
+                <h3>Resultados: </h3>
+
+            </div>
         </form>
 
-        <div class="col-xs-12 col-sm-12" name="resultados" id="resultados">
-            <br>
-            <h3>Resultados: </h3>
 
-        </div>
     </div>
 </div>
 @endsection
