@@ -5,10 +5,15 @@ namespace ITube;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Proyects extends Model
+class Projects extends Model
 {
     public function callSerachTubesProcedure($area_cables, $num_cables, $idtype, $isForniture){
         $cable_types = DB::select('call search_tubes("'.$area_cables.'","'.$num_cables.'","'.$idtype.'","'.$isForniture.'")');
         return $cable_types;
+    }
+
+    public function callAll(){
+        $results = Projects::all();
+        return $results;
     }
 }

@@ -26,9 +26,11 @@ Route::get('/cables/{id}', 'CablesController@selectCables');
 Route::get('/cablesdiameter/{id}','CablesController@getCableDiameter');
 
 Route::post('calcular',[
-    'as' => 'ProyectsController.calcularTrayectoria',
-    'uses' => 'ProyectsController@calcularTrayectoria'
+    'as' => 'ProjectsController.calcularTrayectoria',
+    'uses' => 'ProjectsController@calcularTrayectoria'
 ]);
+
+Route::resource('projects', 'ProjectsController');
 
 Route::get('user/profile','UserController@profile');
 Route::post('user/update','UserController@update');
