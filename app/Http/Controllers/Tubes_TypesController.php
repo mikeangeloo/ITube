@@ -22,7 +22,7 @@ class tubes_TypesController extends Controller
             $html .= '<option> Escoge... </option>';
             foreach ($tipo as $tube_type)
             {
-                $html .= '<option value="'.$tube_type->id.'"> '.$tube_type->name.'</option>';
+                $html .= '<option value="'.$tube_type->id.'" data-tubename="'.$tube_type->name.'"> '.$tube_type->name.'</option>';
             }
 
             return $html;

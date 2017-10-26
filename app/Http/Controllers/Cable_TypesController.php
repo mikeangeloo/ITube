@@ -21,7 +21,7 @@ class Cable_TypesController extends Controller
             $html .= '<option> Escoge... </option>';
             foreach ($tipoC as $cable_type)
             {
-                $html .= '<option value="'.$cable_type->id.'"> '.$cable_type->name.'</option>';
+                $html .= '<option value="'.$cable_type->id.'" data-cablename_type="'.$cable_type->name.'"> '.$cable_type->name.'</option>';
             }
             $html .= '</select>';
 

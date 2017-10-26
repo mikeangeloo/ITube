@@ -32,10 +32,10 @@
                 <div class="col-xs-12 col-sm-3">
                     <label for="material">Material a utilizar:</label>
                     <select class="form-control" name="material" id="material">
-                        <option value="0" selected>---</option>
-                        <option value="1">Tubos</option>
-                        <option value="2">Charolas</option>
-                        <option value="3">Canaletas</option>
+                        <option value="0" data-material="default">---</option>
+                        <option value="1" data-material="Tubos">Tubos</option>
+                        <option value="2,charolas">Charolas</option>
+                        <option value="3,canaletas">Canaletas</option>
                     </select>
                 </div>
                 <div class="col-xs-12 col-sm-3" name="ajaxSelect" id="ajaxSelect">
@@ -96,5 +96,6 @@
 @endsection
 
 </body>
+
 </html>
 

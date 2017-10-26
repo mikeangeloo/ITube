@@ -1,7 +1,20 @@
 body{
     font-size: 16px;
-    background: white;
+    background-color: white;
+
 }
+.imgLogo{
+    width: 30%;
+    height: auto;
+    border-radius: 20%;
+
+}
+
+.contenidoimg{
+    text-align: center;
+}
+
+
 label{
     font-size: 16px;
 }

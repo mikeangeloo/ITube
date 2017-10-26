@@ -16,9 +16,13 @@ $(document).ready(function() {
     });
 
     $("select[name='material']").change(function () {
-        var material = $(this).val();
+        var materialval = $(this);
+        var material = materialval.find(':selected').data('material');
 
-        if(material === "1"){
+
+
+
+        if(material === "Tubos"){
             $.ajax({
 
                 url: "/ITube/public/tube_types",
@@ -26,7 +30,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function (msg) {
                     $("#selected_material").html(msg);
-                    $("#use_material").val("tubos");
+                    $("#use_material").val("Tubos");
                 }
             });
         }else{
@@ -92,14 +96,32 @@ $(document).ready(function() {
         });
     });
 
+    //$("#pdf").on('click',function(){
+    //    $("#formulario").submit();
+    //
+    //
+    //});
+
     $("#pdf").on('click',function(){
-        //$("#cable_type").serialize("ddd");
+
+        var materialval = $("#selected_material");
+        var material = materialval.find(':selected').data('tubename');
+
+        var cable = $("#cable_type");
+        var cablenametype = cable.find(':selected').data('cablename_type');
+
+        var cablen = $("#cable_id");
+        var cablename = cablen.find(':selected').data('cablename');
+
+            $("#formulario").append('<input type="hidden" name="tubename" value="'+material+'">');
+            $("#formulario").append('<input type="hidden" name="cablename_type" value="'+cablenametype+'">');
+            $("#formulario").append('<input type="hidden" name="cablename" value="'+cablename+'">');
+
+
 
         $("#formulario").submit();
-        //alert(userData);
 
 
-        //window.open('/ITube/public/pdfview?'+userData);
     });
 
 
