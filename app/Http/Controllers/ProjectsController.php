@@ -4,6 +4,8 @@ namespace ITube\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use ITube\ProjectsContent;
 use ITube\Projects;
 use ITube\User;
@@ -38,8 +40,8 @@ class ProjectsController extends Controller
             $proyecto->user_id = $userid[0]['id'];
             $proyecto->name_project = $request->nombreproyecto;
             $proyecto->general_description = $request->descripcionproyecto;
-            $proyecto->share_link = url("/");
-
+            $newHash = Str::random(10);
+            $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
             $proyecto->save();
 
         }
@@ -47,8 +49,12 @@ class ProjectsController extends Controller
         return $proyecto->id;
     }
 
-    public function show(){
-        echo "show";
+    public function show($link){
+
+        $result = Projects::where('share_link','=',url("projects/".$link))->get();
+
+        echo "<pre>";
+        print_r($result);
     }
 
     public function calcularTrayectoria(){
