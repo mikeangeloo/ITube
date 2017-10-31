@@ -46,8 +46,8 @@
                                     {{ Auth::user()->name }} <span class="caret"></span></a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{url('edit-profile')}}">
-                                        <span class="glyphicon glyphicon-edit"></span> Editar Perfil</a></li>
+                                <li><a href="{{route('users.show',$user->id)}}">
+                                        <span class="glyphicon glyphicon-edit"></span> Ver Perfil</a></li>
                                 <li><a href="#">
                                         <span class="glyphicon glyphicon-save"></span> Proyectos guardados</a></li>
                                 <li class="divider"></li>

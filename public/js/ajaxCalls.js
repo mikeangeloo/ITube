@@ -124,6 +124,27 @@ $(document).ready(function() {
 
     });
 
+    $("#guardar").on('click',function(){
+
+       var datos = $("#formulario").serialize();
+        $.ajax({
+           type: "POST",
+            url: "/ITube/public/projects",
+            data: datos,
+            success: function(data){
+
+                console.log(data);
+
+            }
+
+        });
+
+        window.location.href = "/ITube/public";
+
+
+
+    });
+
 
 
 

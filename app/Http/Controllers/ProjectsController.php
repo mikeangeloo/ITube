@@ -34,6 +34,8 @@ class ProjectsController extends Controller
     }
 
     public function storeProyect(Request $request){
+
+        $status = "Create";
         $proyecto = new Projects();
         if($request->usuario=="default"){
             $userid = User::where('name','=','default')->get();
@@ -42,7 +44,16 @@ class ProjectsController extends Controller
             $proyecto->general_description = $request->descripcionproyecto;
             $newHash = Str::random(10);
             $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
-            $proyecto->save();
+
+            if ($proyecto->save()) {
+                session()->flash('status', 'Project '.$status.'d successfully');
+                return redirect(route('users.index'));
+            }
+            session()->flash('status', 'Unable to '.$status.' project try again');
+            return back()->withInput();
+
+
+
 
         }
 

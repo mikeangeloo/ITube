@@ -32,7 +32,8 @@ Route::post('calcular',[
 
 Route::resource('projects', 'ProjectsController');
 
-Route::get('user/profile','UserController@profile');
-Route::post('user/update','UserController@update');
+//Route::get('user/profile','UserController@profile');
+//Route::post('user/update','UserController@update');
 
+Route::resource('users','UserController');
 Route::post('pdfview',array('as'=>'pdfview','uses'=>'PDFController@pdfview'));
