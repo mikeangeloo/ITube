@@ -38,6 +38,8 @@
                         <li class="active"><a href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span> Inicio </a></li>
                         <li><a href="{{url('/')}}">
                                 <span class="glyphicon glyphicon-upload"></span> Crear proyecto</a></li>
+                        <li><a href="{{url('/dashboard/view')}}">
+                                <span class="glyphicon glyphicon-save"></span> Proyectos guardados</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <div class="avatar">
@@ -48,8 +50,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{route('users.show',$user->id)}}">
                                         <span class="glyphicon glyphicon-edit"></span> Ver Perfil</a></li>
-                                <li><a href="#">
-                                        <span class="glyphicon glyphicon-save"></span> Proyectos guardados</a></li>
+
                                 <li class="divider"></li>
                                 <li>
                                     <a href="{{ route('logout') }}"
@@ -66,29 +67,21 @@
                         </li>
 
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Buscar">
-                        </div>
-                        <button type="submit" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </form>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                <span class="glyphicon glyphicon-log-out"></span>Salir
-                            </a>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                    <span class="glyphicon glyphicon-log-out"></span>Salir
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 @else
                 <ul class="nav navbar-nav navbar-right">
                         <li>

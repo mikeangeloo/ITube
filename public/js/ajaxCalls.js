@@ -10,7 +10,7 @@ $(document).ready(function() {
         url: "/ITube/public/cables_types",
         dataType: "html",
         success: function (msg) {
-            $("#cable_type").html(msg);
+            $("select[name='cable_type']").html(msg);
 
         }
     });
@@ -57,13 +57,15 @@ $(document).ready(function() {
 
     });
 
-    $("select[name='cable_type']").change(function () {
+    $('select[name="cable_type"]').change(function () {
         var cable_type_id = $(this).val();
+        console.log($("#cable_type"));
         $.ajax({
             url: '/ITube/public/cables/'+cable_type_id,
             dataType: "html",
             success: function (msg) {
-                $("#cable_id").html(msg);
+                $('select[name="cable_id"]').html(msg);
+
             }
         });
 
@@ -77,7 +79,9 @@ $(document).ready(function() {
             success: function (msg) {
 
                 console.log(msg);
-                $("#cable_diameter").val(msg[0].external_diameter);
+                $('input[name="cable_diameter"]').val(msg[0].external_diameter);
+
+
             }
         });
 

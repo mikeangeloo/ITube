@@ -19,6 +19,9 @@ Auth::routes();
 
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route :: get('/dashboard/view', 'HomeController@projectsList');
+
+
 Route::get('/tube_types', 'Tubes_TypesController@select_allTubeTypes');
 Route::get('/tubes/{id}', 'TubesController@selectTubes');
 Route::get('/cables_types', 'Cable_TypesController@selectAllCableTypes');

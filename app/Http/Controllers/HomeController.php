@@ -4,6 +4,7 @@ namespace ITube\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use ITube\Projects;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard',array('user'=>Auth::user()));
+        return view('dashboard.view',array('user'=>Auth::user()));
+    }
+
+    public function projectsList(){
+        $projects = Projects::all();
+        $user = Auth::user();
+        
+        return view('dashboard.view',compact('projects','user'));
     }
 }
