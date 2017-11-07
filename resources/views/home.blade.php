@@ -26,12 +26,12 @@
         </div>
 
 
-        {{--<form class="" name="formulario" id="formulario" action="projects" method="POST">--}}
-        <form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">
+        <form class="" name="formulario" id="formulario" action="projects" method="POST">
+        {{--<form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">--}}
 
 
             {{ csrf_field() }}
-            {{--<input type="submit" value="Probar">--}}
+            <input type="submit" value="Probar">
             <div class="col-sm-12 col-xs-12">
 
                 <div class="col-sm12 col-xs-12">
@@ -74,7 +74,7 @@
                 {{--</div>--}}
                 <div class="col-xs-12 col-sm-3">
 
-                    <label for="interior">¿Es para interior? Si:</label>
+                    <label for="interior">¿Es Mobiliario? Si:</label>
                     <input type="checkbox" name="interior" id="interior">
                 </div>
 

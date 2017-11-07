@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddForeignKeysToProjectsContentTable extends Migration {
+class AddForeignKeysToProjectsContentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class AddForeignKeysToProjectsContentTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('projects_content', function(Blueprint $table)
+		Schema::table('projects_contents', function(Blueprint $table)
 		{
 			$table->foreign('cables_id', 'fk_projects_content_cables')->references('id')->on('cables')->onUpdate('CASCADE')->onDelete('CASCADE');
 			$table->foreign('gutters_id', 'fk_projects_content_gutters')->references('id')->on('gutters')->onUpdate('CASCADE')->onDelete('CASCADE');
@@ -30,7 +30,7 @@ class AddForeignKeysToProjectsContentTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('projects_content', function(Blueprint $table)
+		Schema::table('projects_contents', function(Blueprint $table)
 		{
 			$table->dropForeign('fk_projects_content_cables');
 			$table->dropForeign('fk_projects_content_gutters');

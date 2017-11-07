@@ -19,7 +19,6 @@ class CreateCablesTable extends Migration {
 			$table->string('description', 100)->nullable();
 			$table->float('external_diameter', 5)->unsigned()->nullable();
 			$table->timestamps();
-
 		});
 	}
 

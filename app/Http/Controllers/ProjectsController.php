@@ -2,6 +2,7 @@
 
 namespace ITube\Http\Controllers;
 
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -17,7 +18,7 @@ class ProjectsController extends Controller
     }
 
     public function store(Request $request){
-
+        $status = "Create";
         $proyectoconte = new ProjectsContent();
         $proyectoid = $this->storeProyect($request);
 
@@ -28,37 +29,42 @@ class ProjectsController extends Controller
         $proyectoconte->cables_id = $request->cable_id;
         $proyectoconte->details = $request->respuestas;
 
-        $proyectoconte->save();
+        if ($proyectoconte->save()) {
+            session()->flash('status', 'Project '.$status.'d successfully');
+            return Redirect::to('/');
+        }else{
+            session()->flash('status', 'Unable to '.$status.' project try again');
+            return back()->withInput();
+        }
 
-        return Redirect::to('/');
+
     }
 
     public function storeProyect(Request $request){
 
-        $status = "Create";
+
         $proyecto = new Projects();
         if($request->usuario=="default"){
-            $userid = User::where('name','=','default')->get();
+            $userid = User::where('name','=','Default')->get();
             $proyecto->user_id = $userid[0]['id'];
             $proyecto->name_project = $request->nombreproyecto;
             $proyecto->general_description = $request->descripcionproyecto;
             $newHash = Str::random(10);
             $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
-
-            if ($proyecto->save()) {
-                session()->flash('status', 'Project '.$status.'d successfully');
-                return redirect(route('users.index'));
-            }
-            session()->flash('status', 'Unable to '.$status.' project try again');
-            return back()->withInput();
-
-
-
-
+            $proyecto->save();
+        }else{
+            $userid = User::where('id','=',$request->usuario)->get();
+            $proyecto->user_id = $userid[0]['id'];
+            $proyecto->name_project = $request->nombreproyecto;
+            $proyecto->general_description = $request->descripcionproyecto;
+            $newHash = Str::random(10);
+            $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
+            $proyecto->save();
         }
 
         return $proyecto->id;
     }
+
 
     public function show($link){
 

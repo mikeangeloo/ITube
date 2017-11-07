@@ -55,12 +55,12 @@
         @if(isset($item['interior']))
             <tr>
 
-                <td>¿Es para interior?:</td><td>Si</td>
+                <td>¿Es para mobiliario?:</td><td>Si</td>
             </tr>
         @else
             <tr>
 
-                <td>¿Es para interior?:</td><td>No</td>
+                <td>¿Es para mobiliario?:</td><td>No</td>
             </tr>
         @endif
             <tr>

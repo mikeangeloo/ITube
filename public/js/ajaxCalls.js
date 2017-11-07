@@ -42,6 +42,8 @@ $(document).ready(function() {
 
     });
 
+
+
     $("select[name='selected_material']").change(function () {
         var materialid = $(this).val();
             $.ajax({
