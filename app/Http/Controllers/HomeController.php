@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.view',array('user'=>Auth::user()));
+        $projects = Projects::all();
+        return view('dashboard.view',array('user'=>Auth::user()),compact('projects'));
     }
 
     public function projectsList(){

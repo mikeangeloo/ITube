@@ -26,12 +26,12 @@
         </div>
 
 
-        {{--<form class="" name="formulario" id="formulario" action="projects" method="POST">--}}
-        <form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">
+        <form class="" name="formulario" id="formulario" action="projects" method="POST">
+        {{--<form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">--}}
 
 
             {{ csrf_field() }}
-            {{--<input type="submit" value="Probar">--}}
+            <input type="submit" value="Probar">
             <div class="col-sm-12 col-xs-12">
 
                 <div class="col-sm12 col-xs-12">
@@ -82,9 +82,13 @@
 
             <div class="col-sm-12 col-xs-12">
                 <hr class="conjunto2">
+                <div class="col-xs-12 col-sm-12">
+                    <button class="btn btn-success" name="agregar" id="agregar" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+
+                </div>
+                <br>
 
                 <div class="col-xs-12 col-sm-3">
-
                     <label for="cables_amount">Número de Cables:</label>
                     <input type="number" class="form-control" id="cables_amount" name="cables_amount" value="1" min="1">
                 </div>
@@ -105,6 +109,20 @@
                 <div class="col-xs-12 col-sm-3">
                     <label for="cable_diameter">Diametro exterior (mm):</label>
                     <input class="form-control" name="cable_diameter" id="cable_diameter">
+                </div>
+
+
+                <div class="col-sm-12">
+                    <br>
+                    <br>
+                    <h3>Resumen de cables </h3>
+                    <table name="resumen" id="resumen" class="table table-bordered">
+                        <th>Número de Cables</th>
+                        <th>Tipo Cable</th>
+                        <th>Cable</th>
+                        <th>Diametro exteriomm</th>
+                        <th>Opción</th>
+                    </table>
                 </div>
 
 

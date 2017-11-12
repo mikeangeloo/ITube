@@ -68,6 +68,7 @@ class ProjectsController extends Controller
 
     public function store(Request $request){
 
+
         $status = "Create";
         $proyecto = new Projects();
         if($request->usuario=="default"){
@@ -157,27 +158,42 @@ class ProjectsController extends Controller
     }
 
     public function calcularTrayectoria(){
-        //print_r($_POST);
+//        echo "<pre>";
+//        print_r($_POST);
+        $suma_num_cables = 0;
+        $suma_diameter = 0;
 
          $html = '<h3>Para este trayecto es recomendable utilizar:</h3>';
 
-         $external_diameter = $_POST['cable_diameter'];
-         $num_cables = $_POST['cables_amount'];
+
+
+        for($i=0; $i<= count($_POST['numcables'])-1; $i++){
+            $num_cables = $_POST['numcables'][$i];
+            $suma_num_cables = $suma_num_cables + $num_cables;
+
+        }
+
+        for($i=0; $i<= count($_POST['diameter'])-1; $i++){
+            $num_diameter = $_POST['diameter'][$i];
+            $suma_diameter = $suma_diameter + $num_diameter;
+
+        }
+
          $idSelectedMaterial = $_POST['selected_material'];
          $isForniture = 0;
         if(isset($_POST['interior'])){
             $isForniture = 1;
         }
 
-         $areaCables = round(pi()*pow(($external_diameter/2),2),2);
-         $totalareaCables = ($areaCables)*($num_cables);
+         $areaCables = round(pi()*pow(($suma_diameter/2),2),2);
+         $totalareaCables = ($areaCables)*($suma_num_cables);
 
         $querry = new Projects();
-        $result = $querry->callSerachTubesProcedure($totalareaCables,$num_cables,$idSelectedMaterial,$isForniture);
+        $result = $querry->callSerachTubesProcedure($totalareaCables,$suma_num_cables,$idSelectedMaterial,$isForniture);
 
         if(!empty($result)){
             foreach ($result as $_result) {
-                $html .= '<textarea block name="respuestas" id="respuestas" value="afdasf">'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$num_cables."\n\r".'</textarea>';
+                $html .= '<textarea block name="respuestas" id="respuestas" value="afdasf">'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'</textarea>';
             }
         }else{
             $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';

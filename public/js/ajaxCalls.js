@@ -130,6 +130,45 @@ $(document).ready(function() {
 
     });
 
+    $("#agregar").on('click',function(){
+
+        var numcables = $("#cables_amount").val();
+        var cable_type_id = $("#cable_type");
+        var cable_type = cable_type_id.find(':selected').data('cablename_type');
+        var cable_id = $("#cable_id");
+        var cable = cable_id.find(':selected').data('cablename');
+        var diameter = $("#cable_diameter").val();
+
+
+        var tabla ='<tr>';
+        tabla +="<td>"
+                    +"<input name='numcables[]' readonly class='form-control' value='"+numcables+"'>"
+                +"</td>"
+                +"<td>"
+                    +"<input name='tipocable[]' class='form-control' readonly value='"+cable_type+"'>"
+                +"</td>"
+                +"<td>"
+                    +"<input name='cable[]' class='form-control' readonly value='"+cable+"'>"
+                +"</td>"
+                +"<td>"
+                    +"<input name='diameter[]' class='form-control' readonly value='"+diameter+"'>"
+                +"</td>"
+                +"<td>"
+                    +"<button type='button' class='btn btn-warning borrar'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>"
+                +"</td>";
+        tabla +='</tr>';
+        $("#resumen").append(tabla);
+
+    });
+
+    $(function () {
+        $(document).on('click', '.borrar', function (event) {
+            event.preventDefault();
+            $(this).closest('tr').remove();
+
+        });
+    });
+
     $("#guardar").on('click',function(){
 
        var datos = $("#formulario").serialize();
