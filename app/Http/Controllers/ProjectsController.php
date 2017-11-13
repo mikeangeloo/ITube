@@ -4,6 +4,7 @@ namespace ITube\Http\Controllers;
 
 use DOMDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
@@ -17,61 +18,14 @@ class ProjectsController extends Controller
 
     }
 
-//    public function store(Request $request){
-//        $status = "Create";
-//        $proyectoconte = new ProjectsContent();
-//        $proyectoid = $this->storeProyect($request);
-//
-//        $proyectoconte->projects_id =$proyectoid;
-//        $proyectoconte->tubes_types_id = $request->selected_material;
-//        $proyectoconte->cables_amount = $request->cables_amount;
-//        $proyectoconte->cables_types_id = $request->cables_type;
-//        $proyectoconte->cables_id = $request->cable_id;
-//        $proyectoconte->details = $request->respuestas;
-//
-//        if ($proyectoconte->save()) {
-//            session()->flash('status', 'Project '.$status.'d successfully');
-//            return Redirect::to('/');
-//        }else{
-//            session()->flash('status', 'Unable to '.$status.' project try again');
-//            return back()->withInput();
-//        }
-//
-//
-//    }
-//
-//    public function storeProyect(Request $request){
-//
-//
-//        $proyecto = new Projects();
-//        if($request->usuario=="default"){
-//            $userid = User::where('name','=','Default')->get();
-//            $proyecto->user_id = $userid[0]['id'];
-//            $proyecto->name_project = $request->nombreproyecto;
-//            $proyecto->general_description = $request->descripcionproyecto;
-//            $newHash = Str::random(10);
-//            $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
-//            $proyecto->save();
-//        }else{
-//            $userid = User::where('id','=',$request->usuario)->get();
-//            $proyecto->user_id = $userid[0]['id'];
-//            $proyecto->name_project = $request->nombreproyecto;
-//            $proyecto->general_description = $request->descripcionproyecto;
-//            $newHash = Str::random(10);
-//            $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
-//            $proyecto->save();
-//        }
-//
-//        return $proyecto->id;
-//    }
-
 
     public function store(Request $request){
 
 
         $status = "Create";
-        $proyecto = new Projects();
+
         if($request->usuario=="default"){
+            $proyecto = new Projects();
             $userid = User::where('name','=','Default')->get();
             $proyecto->user_id = $userid[0]['id'];
             $proyecto->name_project = $request->nombreproyecto;
@@ -90,8 +44,12 @@ class ProjectsController extends Controller
 
 
         }else{
-            $userid = User::where('id','=',$request->usuario)->get();
-            $proyecto->user_id = $userid[0]['id'];
+            $proyecto = new Projects();
+//            echo "<pre>";
+//            print_r($_POST);
+//            exit;
+            //$userid = User::where('id','=',$request->usuario)->get();
+            $proyecto->user_id = $request->usuario;
             $proyecto->name_project = $request->nombreproyecto;
             $proyecto->general_description = $request->descripcionproyecto;
             $newHash = Str::random(10);
@@ -110,18 +68,24 @@ class ProjectsController extends Controller
 
     }
 
-    public function show($link){
+    public function show($id){
 
-        $result = Projects::where('share_link','=',url("projects/".$link))->get();
+        $result = Projects::where('id','=',$id)->get();
 
-        echo "<pre>";
-        print_r($result);
+
+        $user = Auth::user();
+
+        return view('projects.view',compact("result","user"));
     }
 
     private function generarXML(Request $request){
+//        echo "<pre>";
+//        print_r($_POST);
+
+        $suma_numcables =0;
         $xml = new DomDocument('1.0', 'UTF-8');
 
-        $proyectonombre = $xml->createElement('Proyecto');
+        $proyectonombre = $xml->createElement('trayectoria');
         $proyectonombre = $xml->appendChild($proyectonombre);
 
         $proyecto_contenido = $xml->createElement('Contenido');
@@ -136,20 +100,59 @@ class ProjectsController extends Controller
         $selected_material = $xml->createElement('selected_material',$request->selected_material);
         $selected_material = $proyecto_contenido->appendChild($selected_material);
 
-        $cables_amount = $xml->createElement('cables_amount',$request->cables_amount);
-        $cables_amount = $proyecto_contenido->appendChild($cables_amount);
+        $cables_content = $xml->createElement('cables');
+        $cables_content = $proyecto_contenido->appendChild($cables_content);
 
-        $cable_type = $xml->createElement('cable_type',$request->cable_type);
-        $cable_type = $proyecto_contenido->appendChild($cable_type);
 
-        $cable_id = $xml->createElement('cable_id',$request->cable_id);
-        $cable_id = $proyecto_contenido->appendChild($cable_id);
 
-        $cable_diameter = $xml->createElement('cable_diameter',$request->cable_diameter);
-        $cable_diameter = $proyecto_contenido->appendChild($cable_diameter);
 
-        $respuestas = $xml->createElement('respuestas',$request->respuestas);
-        $respuestas = $proyecto_contenido->appendChild($respuestas);
+        $suma_num_cables = 0;
+        $suma_areatotaldiameter = 0;
+        for($i=0; $i<= count($request->numcables)-1; $i++){
+            $cables = $xml->createElement('cable');
+            $cables = $cables_content->appendChild($cables);
+
+            $num_cables = $request['numcables'][$i];
+            $num_diameter = $request['diameter'][$i];
+            $areaCables = round(pi()*pow(($num_diameter/2),2),2);
+            $totalareaCables = ($areaCables)*($num_cables);
+
+            $cable_name = $xml->createElement('nombre',$request->cable[$i]);
+            $cable_name = $cables->appendChild($cable_name);
+
+            $cable_type = $xml->createElement('tipo',$request->tipocable[$i]);
+            $cable_type = $cables->appendChild($cable_type);
+
+            $cable_diameter = $xml->createElement('diametro_exterior',$request->diameter[$i]);
+            $cable_diameter = $cables->appendChild($cable_diameter);
+
+            $cables_amount = $xml->createElement('numero',$request->numcables[$i]);
+            $cables_amount = $cables->appendChild($cables_amount);
+
+            $cables_area = $xml->createElement('area_cables',$totalareaCables);
+            $cables_area = $cables->appendChild($cables_area);
+
+            $suma_num_cables = $suma_num_cables + $num_cables;
+            $suma_areatotaldiameter = $suma_areatotaldiameter+$totalareaCables;
+
+        }
+        // falta suma, area total
+        $suma = $xml->createElement('suma',$suma_num_cables);
+        $suma = $cables->appendChild($suma);
+
+        $area = $xml->createElement('area_total',$suma_areatotaldiameter);
+        $area = $cables->appendChild($area);
+
+        $conducto = $xml->createElement('conducto');
+        $conducto = $proyecto_contenido->appendChild($conducto);
+
+        $tubo=$xml->createElement('tubo',$request->material_description);
+        $tubo = $conducto->appendChild($tubo);
+
+
+
+        $respuestas = $xml->createElement('respuesta',$request->respuestas);
+        $respuestas = $proyectonombre->appendChild($respuestas);
 
         $xml->formatOutput = true;
         $xml_generate = $xml->saveXML();
@@ -161,7 +164,7 @@ class ProjectsController extends Controller
 //        echo "<pre>";
 //        print_r($_POST);
         $suma_num_cables = 0;
-        $suma_diameter = 0;
+        $suma_areatotaldiameter = 0;
 
          $html = '<h3>Para este trayecto es recomendable utilizar:</h3>';
 
@@ -169,15 +172,22 @@ class ProjectsController extends Controller
 
         for($i=0; $i<= count($_POST['numcables'])-1; $i++){
             $num_cables = $_POST['numcables'][$i];
-            $suma_num_cables = $suma_num_cables + $num_cables;
-
-        }
-
-        for($i=0; $i<= count($_POST['diameter'])-1; $i++){
             $num_diameter = $_POST['diameter'][$i];
-            $suma_diameter = $suma_diameter + $num_diameter;
+            $areaCables = round(pi()*pow(($num_diameter/2),2),2);
+            $totalareaCables = ($areaCables)*($num_cables);
+
+            $suma_num_cables = $suma_num_cables + $num_cables;
+            $suma_areatotaldiameter = $suma_areatotaldiameter+$totalareaCables;
 
         }
+
+
+
+//        for($i=0; $i<= count($_POST['diameter'])-1; $i++){
+//            $num_diameter = $_POST['diameter'][$i];
+//            $suma_diameter = $suma_diameter + $num_diameter;
+//
+//        }
 
          $idSelectedMaterial = $_POST['selected_material'];
          $isForniture = 0;
@@ -185,22 +195,40 @@ class ProjectsController extends Controller
             $isForniture = 1;
         }
 
-         $areaCables = round(pi()*pow(($suma_diameter/2),2),2);
-         $totalareaCables = ($areaCables)*($suma_num_cables);
+//         $areaCables = round(pi()*pow(($suma_diameter/2),2),2);
+//         $totalareaCables = ($areaCables)*($suma_num_cables);
 
         $querry = new Projects();
-        $result = $querry->callSerachTubesProcedure($totalareaCables,$suma_num_cables,$idSelectedMaterial,$isForniture);
+        $result = $querry->callSerachTubesProcedure($suma_areatotaldiameter,$suma_num_cables,$idSelectedMaterial,$isForniture);
 
+//
         if(!empty($result)){
             foreach ($result as $_result) {
-                $html .= '<textarea block name="respuestas" id="respuestas" value="afdasf">'.$_result->description.'" "'."\n\r".'Area ocupada: '.$totalareaCables.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'</textarea>';
+
+                if(isset($_result->one_driver)){
+                    $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 53%: '.$_result->one_driver."mm^2"."\n\r".'</textarea>';
+                }
+                if(isset($_result->two_driver)){
+                    $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 31%: '.$_result->two_driver."mm^2"."\n\r".'</textarea>';
+                }
+                if(isset($_result->more_two_driver)){
+                    $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 40%: '.$_result->more_two_driver."mm^2"."\n\r".'</textarea>';
+                }
+                if(isset($_result->sixty_area)){
+                    $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 60%: '.$_result->sixty_area."mm^2"."\n\r".'</textarea>';
+                }
+
             }
         }else{
             $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';
         }
-
+//        echo "Area total cables : ".$suma_areatotaldiameter;
+//        echo "Total cables: ".$suma_num_cables;
+//        print_r($html);
+//        exit;
 
         return $html;
+
 
     }
 

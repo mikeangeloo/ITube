@@ -10,14 +10,11 @@
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Detalles perfil
-                        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary" style="float: right">Editar</a>
+                        Detalles proyecto
+                        <a href="{{ route('projects.edit',$user->id) }}" class="btn btn-primary" style="float: right">Editar</a>
 
                     </div>
-                    <div class="col-sm-12 col-lg-12 text-center">
-                        {!! Html::image("uploads/usersprofile/{$user->image}",'userimg',['class'=>'imgperfil']) !!}
-                        <hr class="conjunto2">
-                    </div>
+
                     <div class="panel-body">
                         <div class="form-horizontal">
                             <div class="form-group">

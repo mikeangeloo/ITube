@@ -32,14 +32,14 @@
     <br/>
 
 
-    <table>
+    <table style="text-align: center">
 
         <tr>
 
 
 
             <th>Titulo</th>
-            <th>Descripción</th>
+            <th colspan="3">Descripción</th>
 
         </tr>
 
@@ -47,46 +47,47 @@
 
         @foreach ($items as $item)
             <tr>
-                <td>Material usado:</td><td> {{$item['use_material']}}</td>
+                <th>Material usado:</th><td colspan="3"> {{$item['use_material']}}</td>
             </tr>
             <tr>
-                <td>Categoría utilizada:</td><td> {{$item['tubename']}}</td>
+                <th>Categoría utilizada:</th><td colspan="3"> {{$item['tubename']}}</td>
             </tr>
         @if(isset($item['interior']))
             <tr>
 
-                <td>¿Es para mobiliario?:</td><td>Si</td>
+                <th>¿Es para mobiliario?:</th><td colspan="3">Si</td>
             </tr>
         @else
             <tr>
 
-                <td>¿Es para mobiliario?:</td><td>No</td>
+                <th>¿Es para mobiliario?:</th><td colspan="3">No</td>
             </tr>
         @endif
-            <tr>
-                <td>Cantidad de cables usados: </td><td>{{$item['cables_amount']}}</td>
-            </tr>
-            <tr>
-                <td>Tipo de cable: </td><td>{{$item['cablename_type']}}</td>
-            </tr>
-            <tr>
-                <td>Nombre del cable: </td><td>{{$item['cablename']}}</td>
-            </tr>
-            <tr>
-                <td>Diametro del cable: </td><td>{{$item['cable_diameter']}}mm</td>
-            </tr>
-            <tr>
-                <td>Resumen del calculo: </td><td>{{$item['respuestas']}}</td>
-            </tr>
+
+        <tr>
+            <th>Cantidad de cables usados</th>
+            <th>Nombre del cable</th>
+            <th>Tipo de cable</th>
+            <th>Diametro del cable</th>
+        </tr>
 
 
+        @for($i=0; $i<=count($item['numcables'])-1; $i++)
+            <tr>
+                <td>{{$item['numcables'][$i]}}</td>
+                <td>{{$item['cable'][$i]}}</td>
+                <td>{{$item['tipocable'][$i]}}</td>
+                <td>{{$item['diameter'][$i]}}mm</td>
+            </tr>
 
-
+        @endfor
 
 
         @endforeach
 
     </table>
+    <h4>Resumen del calculo: </h4>
+    <p><pre>{{$item['respuestas']}}</p>
 
 </div>
 </body>

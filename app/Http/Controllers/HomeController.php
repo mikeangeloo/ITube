@@ -25,14 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Projects::all();
-        return view('dashboard.view',array('user'=>Auth::user()),compact('projects'));
+        $user = Auth::user();
+        $projects = Projects::where('user_id','=',$user->id)->get();
+        return view('dashboard.view',array('user'=>$user),compact('projects'));
     }
 
     public function projectsList(){
-        $projects = Projects::all();
         $user = Auth::user();
-        
-        return view('dashboard.view',compact('projects','user'));
+        $projects = Projects::where('user_id','=',$user->id)->get();
+        return view('dashboard.view',array('user'=>$user),compact('projects'));
     }
 }

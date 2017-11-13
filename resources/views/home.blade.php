@@ -26,12 +26,12 @@
         </div>
 
 
-        <form class="" name="formulario" id="formulario" action="projects" method="POST">
-        {{--<form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">--}}
+        {{--<form class="" name="formulario" id="formulario" action="projects" method="POST">--}}
+        <form class="" name="formulario" id="formulario" action="pdfview" method="POST" target="_blank">
 
 
             {{ csrf_field() }}
-            <input type="submit" value="Probar">
+            {{--<input type="submit" value="Probar">--}}
             <div class="col-sm-12 col-xs-12">
 
                 <div class="col-sm12 col-xs-12">
@@ -45,9 +45,6 @@
                     <input type="text" name="descripcionproyecto" id="descripcionproyecto">
                     <hr class="conjunto3">
                 </div>
-
-
-
 
                 <div class="col-xs-12 col-sm-3">
 
@@ -120,13 +117,14 @@
                         <th>Número de Cables</th>
                         <th>Tipo Cable</th>
                         <th>Cable</th>
-                        <th>Diametro exteriomm</th>
+                        <th>Diametro exterior</th>
                         <th>Opción</th>
                     </table>
                 </div>
 
 
                 <input type="hidden" name="use_material" id="use_material">
+                <input type="hidden" name="material_description" id="material_description">
                 @if (Route::has('login'))
                     @auth
                         <input type="hidden" name="usuario" id="usuario" value="{{$user->id}}">

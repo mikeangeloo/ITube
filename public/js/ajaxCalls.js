@@ -30,7 +30,7 @@ $(document).ready(function() {
                 dataType: "html",
                 success: function (msg) {
                     $("#selected_material").html(msg);
-                    $("#use_material").val("Tubos");
+                    $("#use_material").val(material);
                 }
             });
         }else{
@@ -45,15 +45,9 @@ $(document).ready(function() {
 
 
     $("select[name='selected_material']").change(function () {
-        var materialid = $(this).val();
-            $.ajax({
-                url: '/ITube/public/tubes/'+materialid,
-                dataType: "html",
-                success: function (msg) {
-                    $("#material_type").html(msg);
-
-                }
-            });
+        var material = $(this);
+        var materialdescripcion = material.find(':selected').data('tubename');
+        $("#material_description").val(materialdescripcion);
 
     });
 
@@ -97,6 +91,7 @@ $(document).ready(function() {
             success: function( msg ) {
                 console.log(msg);
                 $("#resultados").html(msg);
+
 
             }
         });
