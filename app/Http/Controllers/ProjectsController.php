@@ -22,7 +22,9 @@ class ProjectsController extends Controller
     public function store(Request $request){
 
 
+
         $status = "Create";
+        SESSION_START();
 
         if($request->usuario=="default"){
             $proyecto = new Projects();
@@ -35,11 +37,14 @@ class ProjectsController extends Controller
 
             $proyecto->content = $this->generarXML($request);
             if ($proyecto->save()) {
-                session()->flash('status', 'Project '.$status.'d successfully');
-                return Redirect::to('/');
+
+                $_SESSION['mensaje'] = "El proyecto ha sido guardado exitosamente";
+                //session()->flash('status', 'Project '.$status.'d successfully');
+                //return Redirect::to('/');
             }else{
-                session()->flash('status', 'Unable to '.$status.' project try again');
-                return back()->withInput();
+                $_SESSION['error'] = "El proyecto no ha sido guardado";
+                //session()->flash('status', 'Unable to '.$status.' project try again');
+                //return back()->withInput();
             }
 
 
@@ -57,11 +62,14 @@ class ProjectsController extends Controller
 
             $proyecto->content = $this->generarXML($request);
             if ($proyecto->save()) {
-                session()->flash('status', 'Project '.$status.'d successfully');
-                return Redirect::to('/');
+
+                $_SESSION['mensaje'] = "El proyecto ha sido guardado exitosamente";
+                //session()->flash('status', 'Project '.$status.'d successfully');
+                //return Redirect::to('/');
             }else{
-                session()->flash('status', 'Unable to '.$status.' project try again');
-                return back()->withInput();
+                $_SESSION['error'] = "El proyecto no ha sido guardado";
+                //session()->flash('status', 'Unable to '.$status.' project try again');
+                //return back()->withInput();
             }
         }
 
@@ -81,6 +89,9 @@ class ProjectsController extends Controller
     private function generarXML(Request $request){
 //        echo "<pre>";
 //        print_r($_POST);
+//
+//
+//        exit;
 
         $suma_numcables =0;
         $xml = new DomDocument('1.0', 'UTF-8');
@@ -99,6 +110,17 @@ class ProjectsController extends Controller
 
         $selected_material = $xml->createElement('selected_material',$request->selected_material);
         $selected_material = $proyecto_contenido->appendChild($selected_material);
+
+        if($request->interior == true){
+            $interior = $xml->createElement('interior','true');
+            $interior = $proyecto_contenido->appendChild($interior);
+        }
+
+        if($request->interior == false){
+            $interior = $xml->createElement('interior','false');
+            $interior = $proyecto_contenido->appendChild($interior);
+        }
+
 
         $cables_content = $xml->createElement('cables');
         $cables_content = $proyecto_contenido->appendChild($cables_content);
@@ -136,7 +158,7 @@ class ProjectsController extends Controller
             $suma_areatotaldiameter = $suma_areatotaldiameter+$totalareaCables;
 
         }
-        // falta suma, area total
+
         $suma = $xml->createElement('suma',$suma_num_cables);
         $suma = $cables->appendChild($suma);
 
@@ -146,8 +168,21 @@ class ProjectsController extends Controller
         $conducto = $xml->createElement('conducto');
         $conducto = $proyecto_contenido->appendChild($conducto);
 
-        $tubo=$xml->createElement('tubo',$request->material_description);
+        $canaleta = $xml->createElement('canaleta','test');
+        $canaleta = $conducto->appendChild($canaleta);
+
+        $charola = $xml->createElement('charola','test');
+        $charola = $conducto->appendChild($charola);
+
+        $tubo=$xml->createElement('tubo');
+        $tubo->setAttribute('nombre',$request->material_description);
+        $tubo->setAttribute('tipo',$request->tubo_tipo);
+        $tubo->setAttribute('tamano_comercial',$request->tubo_tamanocomercial);
+        $tubo->setAttribute('diametro_interior',$request->tubo_diametroexterior);
+
         $tubo = $conducto->appendChild($tubo);
+
+
 
 
 
@@ -156,6 +191,8 @@ class ProjectsController extends Controller
 
         $xml->formatOutput = true;
         $xml_generate = $xml->saveXML();
+
+
 
         return $xml_generate;
     }
@@ -206,6 +243,7 @@ class ProjectsController extends Controller
             foreach ($result as $_result) {
 
                 if(isset($_result->one_driver)){
+
                     $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 53%: '.$_result->one_driver."mm^2"."\n\r".'</textarea>';
                 }
                 if(isset($_result->two_driver)){
@@ -218,10 +256,17 @@ class ProjectsController extends Controller
                     $html .= '<textarea block name="respuestas" id="respuestas">Area de cables ocupada: '.$suma_areatotaldiameter.' mm^2'."\n" .'Total de cables:'.$suma_num_cables."\n\r".'Material sugerido: '.$_result->description."\r".'Diametro Interior: '.$_result->inside_diameter."mm"."\r".'Area Total: '.$_result->hundred_area."mm^2"."\r".'Área 60%: '.$_result->sixty_area."mm^2"."\n\r".'</textarea>';
                 }
 
+                $html.= '<input type="hidden" name="tubo_tipo" value="'.$_result->description.'">';
+                $html.= '<input type="hidden" name="tubo_metrica" value="'.$_result->metric_designation.'">';
+                $html.= '<input type="hidden" name="tubo_tamanocomercial" value="'.$_result->commercial_size.'">';
+                $html.= '<input type="hidden" name="tubo_diametroexterior" value="'.$_result->inside_diameter.'">';
+
             }
         }else{
             $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';
         }
+
+
 //        echo "Area total cables : ".$suma_areatotaldiameter;
 //        echo "Total cables: ".$suma_num_cables;
 //        print_r($html);

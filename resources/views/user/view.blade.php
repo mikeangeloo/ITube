@@ -10,8 +10,8 @@
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Detalles proyecto
-                        <a href="{{ route('projects.edit',$user->id) }}" class="btn btn-primary" style="float: right">Editar</a>
+                        Detalles de la cuenta
+                        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary" style="float: right">Editar</a>
 
                     </div>
 

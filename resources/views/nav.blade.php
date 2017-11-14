@@ -11,13 +11,14 @@
     {!! Html::style('css/styles.css') !!}
 
 
+
     {!! Html::script('js/jquery.min.js') !!}
     {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
     {!! Html::script('js/ajaxCalls.js') !!}
 
 
 </head>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-global ">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -39,7 +40,7 @@
                         <li><a href="{{url('/')}}">
                                 <span class="glyphicon glyphicon-upload"></span> Crear proyecto</a></li>
                         <li><a href="{{url('/dashboard/view')}}">
-                                <span class="glyphicon glyphicon-save"></span> Proyectos guardados</a></li>
+                                <span class="glyphicon glyphicon-book"></span> Dashboard</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <div class="avatar">

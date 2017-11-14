@@ -50,10 +50,17 @@
                 <th>Material usado:</th><td colspan="3"> {{$item['use_material']}}</td>
             </tr>
             <tr>
-                <th>Categoría utilizada:</th><td colspan="3"> {{$item['tubename']}}</td>
+
+                @if($item['tubename2'] != "undefined")
+                    <th>Categoría utilizada:</th><td colspan="3"> {{$item['tubename2']}}</td>
+                @endif
+                @if($item['tubename'] != "undefined")
+                    <th>Categoría utilizada:</th><td colspan="3"> {{$item['tubename']}}</td>
+                 @endif
             </tr>
         @if(isset($item['interior']))
             <tr>
+
 
                 <th>¿Es para mobiliario?:</th><td colspan="3">Si</td>
             </tr>

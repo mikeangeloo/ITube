@@ -1,6 +1,7 @@
 @extends('nav')
 @section('contenido')
 
+
     <body xmlns="http://www.w3.org/1999/html">
     <div class="form-group row">
         <div class="container">
@@ -46,44 +47,25 @@
                     </div>
 
 
-                    <div class="col-xs-12 col-sm-3">
+                    <div class="col-xs-12 col-sm-12">
 
-                        <label for="material">Material a utilizar:</label>
-                        <select class="form-control" name="material" id="material">
-                            @if($xml->Contenido->material == 0)
-                            <option value="0" data-material="default" selected>---</option>
-                            @endif
-                                @if($xml->Contenido->material == 1)
-                                <option value="1" data-material="Tubos" selected>Tubos</option>
-                                @endif
-                                    @if($xml->Contenido->material == 2)
-                                    <option value="2,charolas" selected>Charolas</option>
-                                @endif
-                                        @if($xml->Contenido->material == 3)
-                                         <option value="3,canaletas" selected>Canaletas</option>
-                                @endif
-                        </select>
-                    </div>
-                    <div class="col-xs-12 col-sm-3" name="ajaxSelect" id="ajaxSelect">
+                        <h5 style="text-align: center">Material seleccionado</h5>
 
-                        <label for="selected_material">Categoría</label>
-                        <select class="form-control" name="selected_material" id="selected_material">
-                            <option data-tubename="<?php echo $xml->Contenido->tubo;?>" value="<?php echo $xml->Contenido->selected_material;?>">
-                                <?php echo $xml->Contenido->tubo;?>
-                            </option>
+                        @foreach($xml->Contenido->conducto as $item)
+                            <p name="selected_material2" id="selected_material2" data-tubename2="<?php echo $item->tubo["nombre"];?>"><b>Nombre: </b><?php echo $item->tubo["nombre"];?></p>
+                            <p><b>Tamaño comercial: </b><?php echo $item->tubo["tamano_comercial"];?>" "</p>
+                            <p><b>Diametro Interior: </b><?php echo $item->tubo["diametro_interior"];?>mm</p>
+                        @endforeach
 
-                        </select>
-                    </div>
-                    {{--<div class="col-xs-12 col-sm-3">--}}
-                    {{--<label for="tipo">Tipo:</label>--}}
-                    {{--<select class="form-control" name="material_type" id="material_type">--}}
+                    <div class="col-xs-12 col-sm-12">
+                        <b>¿Es Mobiliario? Si:</b>
+                        @if($xml->Contenido->interior == "true")
+                            <input type="checkbox" checked disabled>
+                            <input type="hidden" name="interior" id="interior" checked>
+                        @else
+                            <input type="checkbox" disabled>
 
-                    {{--</select>--}}
-                    {{--</div>--}}
-                    <div class="col-xs-12 col-sm-3">
-
-                        <label for="interior">¿Es Mobiliario? Si:</label>
-                        <input type="checkbox" name="interior" id="interior">
+                        @endif
                     </div>
 
                 </div>
@@ -99,7 +81,8 @@
                             <th>Número de Cables</th>
                             <th>Tipo Cable</th>
                             <th>Cable</th>
-                            <th>Diametro exterior</th>
+                            <th>Diámetro exterior</th>
+                            <th>Área Total</th>
 
                             @foreach($xml->Contenido->cables->cable as $item)
                                 <tr>
@@ -107,6 +90,7 @@
                                     <td><input type="text" class="form-control" name="tipocable[]" readonly="" value="<?php echo $item->tipo;?>"></td>
                                     <td><input type="text" class="form-control" name="cable[]" readonly="" value="<?php echo $item->nombre;?>"></td>
                                     <td><input type="text" class="form-control" name="diameter[]" readonly="" value="<?php echo $item->diametro_exterior;?>"></td>
+                                    <td><?php echo $item->area_cables;?>mm<sup>2</sup></td>
                                 </tr>
                             @endforeach
                         </table>

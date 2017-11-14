@@ -108,6 +108,9 @@ $(document).ready(function() {
         var materialval = $("#selected_material");
         var material = materialval.find(':selected').data('tubename');
 
+        var materialval2 = $("#selected_material2");
+        var material2 = materialval2.data('tubename2');
+
         var cable = $("#cable_type");
         var cablenametype = cable.find(':selected').data('cablename_type');
 
@@ -115,6 +118,7 @@ $(document).ready(function() {
         var cablename = cablen.find(':selected').data('cablename');
 
             $("#formulario").append('<input type="hidden" name="tubename" value="'+material+'">');
+            $("#formulario").append('<input type="hidden" name="tubename2" value="'+material2+'">');
             $("#formulario").append('<input type="hidden" name="cablename_type" value="'+cablenametype+'">');
             $("#formulario").append('<input type="hidden" name="cablename" value="'+cablename+'">');
 
@@ -172,14 +176,12 @@ $(document).ready(function() {
             url: "/ITube/public/projects",
             data: datos,
             success: function(data){
-
                 console.log(data);
-
+                window.location.href = "/ITube/public";
             }
-
         });
 
-        window.location.href = "/ITube/public";
+
 
 
 
