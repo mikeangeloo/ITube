@@ -40,9 +40,9 @@
                                         <td>{{$project['general_description']}}</td>
                                         <td>{{$project['created_at']}}</td>
                                         <td>
-                                            <a href="{{url('projects/'.$project['id'])}}">Ver</a>
+                                            <a href="{{ route('projects.show',$project['id']) }}">Ver</a>
                                             |
-                                            <a href="{{url('projects/editar/'.$project['id'])}}">Editar</a>
+                                            <a href="{{ route('projects.edit',$project['id']) }}">Editar</a>
                                             |
                                             <a href="{{url('projects/elimiar/'.$project['id'])}}">Eliminar</a>
                                             |

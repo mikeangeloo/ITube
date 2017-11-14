@@ -1,8 +1,7 @@
+<body xmlns="http://www.w3.org/1999/html">
 @extends('nav')
 @section('contenido')
 
-
-    <body xmlns="http://www.w3.org/1999/html">
     <div class="form-group row">
         <div class="container">
             @if(session()->has('status'))
@@ -13,7 +12,8 @@
             <div class="col-xs-12">
 
                 <h2>Detalles Proyecto</h2>
-                <button class="btn btn-primary" type="button" name="editar" id="editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Editar</button>
+                <a href="{{url('dashboard/view')}}"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Volver</button></a>
+                <a href="{{route('projects.edit',$result[0]['id']) }}"><button class="btn btn-primary" type="button" name="editar" id="editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Editar</button></a>
                 <button class="btn btn-warning" role="button" id="pdf" name="pdf">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                     Exportar PDF</button>
@@ -121,14 +121,9 @@
                     </div>
                 </div>
             </form>
-
-
-
         </div>
     </div>
     @endsection
+</body>
 
-    </body>
-
-    </html>
 

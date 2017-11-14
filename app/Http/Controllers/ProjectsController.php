@@ -277,7 +277,20 @@ class ProjectsController extends Controller
 
     }
 
-    public function editar($id){
+    public function update(Request $request, $id){
+
+        echo "<pre>";
+       print_r($_POST);
+        echo $id;
+        exit;
+    }
+
+    public function edit($id){
+        $result = Projects::where('id','=',$id)->get();
+        $user = Auth::user();
+
+        return view('projects.update',compact("result","user"));
 
     }
+
 }
