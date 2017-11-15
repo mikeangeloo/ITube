@@ -26,7 +26,7 @@ class ProjectsController extends Controller
         $status = "Create";
         SESSION_START();
 
-        if($request->usuario=="default"){
+        if($request->usuario=="1"){
             $proyecto = new Projects();
             $userid = User::where('name','=','Default')->get();
             $proyecto->user_id = $userid[0]['id'];
@@ -87,11 +87,7 @@ class ProjectsController extends Controller
     }
 
     private function generarXML(Request $request){
-//        echo "<pre>";
-//        print_r($_POST);
-//
-//
-//        exit;
+
 
         $suma_numcables =0;
         $xml = new DomDocument('1.0', 'UTF-8');
@@ -198,8 +194,9 @@ class ProjectsController extends Controller
     }
 
     public function calcularTrayectoria(){
-//        echo "<pre>";
-//        print_r($_POST);
+
+
+
         $suma_num_cables = 0;
         $suma_areatotaldiameter = 0;
 
@@ -220,11 +217,6 @@ class ProjectsController extends Controller
 
 
 
-//        for($i=0; $i<= count($_POST['diameter'])-1; $i++){
-//            $num_diameter = $_POST['diameter'][$i];
-//            $suma_diameter = $suma_diameter + $num_diameter;
-//
-//        }
 
          $idSelectedMaterial = $_POST['selected_material'];
          $isForniture = 0;
@@ -232,11 +224,12 @@ class ProjectsController extends Controller
             $isForniture = 1;
         }
 
-//         $areaCables = round(pi()*pow(($suma_diameter/2),2),2);
-//         $totalareaCables = ($areaCables)*($suma_num_cables);
+
 
         $querry = new Projects();
-        $result = $querry->callSerachTubesProcedure($suma_areatotaldiameter,$suma_num_cables,$idSelectedMaterial,$isForniture);
+        $result = $querry->callSerachTubesProcedure_Public($suma_areatotaldiameter,$suma_num_cables,$idSelectedMaterial,$isForniture);
+
+
 
 //
         if(!empty($result)){
@@ -266,23 +259,34 @@ class ProjectsController extends Controller
             $html .='<textarea>Prueba con otras combinaciónes, no existe material soportado :(</textarea>';
         }
 
-
-//        echo "Area total cables : ".$suma_areatotaldiameter;
-//        echo "Total cables: ".$suma_num_cables;
-//        print_r($html);
-//        exit;
-
         return $html;
 
 
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
-        echo "<pre>";
-       print_r($_POST);
-        echo $id;
-        exit;
+        $status = "Update";
+        $proyecto = Projects::find($id);
+
+        $proyecto->user_id = $request->usuario;
+        $proyecto->name_project = $request->nombreproyecto;
+        $proyecto->general_description = $request->descripcionproyecto;
+        $newHash = Str::random(10);
+        $proyecto->share_link = filter_var(url("projects/".$proyecto->user_id.$proyecto->name_project.$newHash),FILTER_SANITIZE_URL);
+
+        $proyecto->content = $this->generarXML($request);
+        if ($proyecto->save()) {
+
+
+            session()->flash('status', 'Project '.$status.'d successfully');
+            return Redirect::to('/dashboard/view');
+        }else{
+
+            session()->flash('status', 'Unable to '.$status.' project try again');
+            return back()->withInput();
+        }
     }
 
     public function edit($id){

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Projects extends Model
 {
-    public function callSerachTubesProcedure($area_cables, $num_cables, $idtype, $isForniture){
+    public function callSerachTubesProcedure_Public($area_cables,$num_cables, $idtype, $isForniture){
         $cable_types = DB::select('call search_tubes("'.$area_cables.'","'.$num_cables.'","'.$idtype.'","'.$isForniture.'")');
         return $cable_types;
     }

@@ -33,6 +33,11 @@ Route::post('calcular',[
     'uses' => 'ProjectsController@calcularTrayectoria'
 ]);
 
+Route::put('calcular',[
+    'as' => 'ProjectsController.calcularTrayectoria',
+    'uses' => 'ProjectsController@calcularTrayectoria'
+]);
+
 Route::resource('projects', 'ProjectsController');
 
 //Route::get('user/profile','UserController@profile');

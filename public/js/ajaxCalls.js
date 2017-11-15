@@ -83,6 +83,7 @@ $(document).ready(function() {
 
     $("#calcular").on('click',function(){
         var datos = $('#formulario').serialize();
+        console.log(datos);
         $.ajax({
             type: "POST",
             url: "/ITube/public/calcular",
@@ -96,6 +97,8 @@ $(document).ready(function() {
             }
         });
     });
+
+
 
     //$("#pdf").on('click',function(){
     //    $("#formulario").submit();
@@ -138,6 +141,10 @@ $(document).ready(function() {
         var cable = cable_id.find(':selected').data('cablename');
         var diameter = $("#cable_diameter").val();
 
+        var area_cables = parseFloat(Math.PI*Math.pow((diameter/2),2)).toFixed(2);
+
+        var totalareaCables = (area_cables)*(numcables);
+
 
         var tabla ='<tr>';
         tabla +="<td>"
@@ -152,6 +159,8 @@ $(document).ready(function() {
                 +"<td>"
                     +"<input name='diameter[]' class='form-control' readonly value='"+diameter+"'>"
                 +"</td>"
+                +"<td>"
+                    +"<p>"+totalareaCables+"mm<sup>2</sup></p></td>"
                 +"<td>"
                     +"<button type='button' class='btn btn-warning borrar'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>"
                 +"</td>";

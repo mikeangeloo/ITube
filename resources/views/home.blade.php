@@ -127,6 +127,7 @@
                         <th>Tipo Cable</th>
                         <th>Cable</th>
                         <th>Diametro exterior</th>
+                        <th>Área Total</th>
                         <th>Opción</th>
                     </table>
                 </div>
@@ -139,7 +140,7 @@
                         <input type="hidden" name="usuario" id="usuario" value="{{$user->id}}">
                     @else
 
-                       <input type="hidden" name="usuario" id="usuario" value="default">
+                       <input type="hidden" name="usuario" id="usuario" value="1">
                     @endauth
                 @endif
                 <div class="col-xs-12 col-sm-12" name="resultados" id="resultados">

@@ -8,6 +8,7 @@
 
 
 
+
 </head>
 
 <body>
@@ -17,6 +18,13 @@
 
         border:1px solid black;
 
+    }
+
+    pre {
+        display: block;
+        font-family: monospace;
+        white-space: pre;
+        margin: 1em 0;
     }
 
 </style>
@@ -93,8 +101,11 @@
         @endforeach
 
     </table>
-    <h4>Resumen del calculo: </h4>
-    <p><pre>{{$item['respuestas']}}</p>
+
+        <h4>Resumen del calculo: </h4>
+    <pre><p>{{$item['respuestas']}}</p></pre>
+
+
 
 </div>
 </body>

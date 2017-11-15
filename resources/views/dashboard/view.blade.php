@@ -46,7 +46,9 @@
                                             |
                                             <a href="{{url('projects/elimiar/'.$project['id'])}}">Eliminar</a>
                                             |
-                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}">Exportar XML</a>
+                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}">Exportar</a>
+                                            |
+                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}">Compartir</a>
 
 
                                         </td>
