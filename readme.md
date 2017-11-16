@@ -5,7 +5,7 @@
     <title>ITube</title>
 </head>
 <body style="background-color: rgba(79, 79, 79, 0.05)">
-<p style="text-align: center"><img style="width: 400px; height: auto; border-radius: 50px" src="../ITube/public/storage/logoItube.png" alt="Logo ITube"></p>
+<p align="center"><img style="width: 400px; height: auto; border-radius: 50px" src="../ITube/public/storage/logoItube.png" alt="Logo ITube"></p>
 
 <h3 style="text-align: center;">Aplicación web para canalizaciones de cableado eléctrico, par trenzado, coaxial y fibra óptica, basados en la norma oficial mexicana NOM-001-SEDE-2012</h3>
 <p style="text-align: right"><img style="width: 100px; height: auto; border-radius: 50px" src="../ITube/public/storage/nom.png" alt="Logo NOM">
