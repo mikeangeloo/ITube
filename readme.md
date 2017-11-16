@@ -1,15 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ITube</title>
-</head>
-<body style="background-color: rgba(79, 79, 79, 0.05)">
-<p align="center"><img style="width: 400px; height: auto; border-radius: 50px" src="../ITube/public/storage/logoItube.png" alt="Logo ITube"></p>
 
-<h3 style="text-align: center;">Aplicación web para canalizaciones de cableado eléctrico, par trenzado, coaxial y fibra óptica, basados en la norma oficial mexicana NOM-001-SEDE-2012</h3>
-<p style="text-align: right"><img style="width: 100px; height: auto; border-radius: 50px" src="../ITube/public/storage/nom.png" alt="Logo NOM">
-<img style="width: 100px; height: auto; border-radius: 50px" src="../ITube/public/storage/TIA-ansi.png" alt="AnsiTIA"></p>
+<h3 align="center">Aplicación web para canalizaciones de cableado eléctrico, par trenzado, coaxial y fibra óptica, basados en la norma oficial mexicana NOM-001-SEDE-2012</h3>
+<p aling="right"><img width= "100px" height="auto" border-radius="50px" src="https://github.com/mikeangeloo/ITube/blob/master/public/storage/nom.png" alt="Logo NOM">
+<img width= "100px" height= "auto" border-radius= "50px" src="https://github.com/mikeangeloo/ITube/blob/master/public/storage/TIA-ansi.png" alt="AnsiTIA"></p>
 
 <p>ITube es un proyecto que permite agilizar el trabajo para arquitectos e ingenieros que requieran hacer instalaciones de cableado de voz y datos.
     Normalmente a la hora de realizar la instalación de cables, hacer cambios o extender la red, se presentan las siguientes cuestiones:
@@ -21,10 +13,9 @@
     El proyecto esta desarrollado con: Laravel 5.5, Ajax, javaScript y MySQL como gestor de base de datos, los cuales permiten que la experiencia del usuario sea la más cómoda posible.
 </p>
 
-<p style="text-align: center;"><img style="width: 800px; height: auto; border-radius: 50px" src="../ITube/public/storage/quepuedohacer.png" alt="AnsiTIA"></p>
+<p align="center"><img width= "800px" height= "auto" border-radius= "50" src="https://github.com/mikeangeloo/ITube/blob/master/public/storage/quepuedohacer.png" alt="AnsiTIA"></p>
 
-
-
-</body>
-</html>
-
+<p align="right"><b>Elaborado por:</b></p>
+<p align="right"><b>TSU Miguel Ángel Ramírez López</b></p>
+<p align="right"><b>Teléfono contacto: 984 184 3836</b></p>
+<p align="right"><b>Email: ing.miguelangel.rl@gmail.com</b></p>
