@@ -18,8 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route :: get('/dashboard/view', 'HomeController@projectsList');
+Route::get('/dashboard/view', 'HomeController@index')->name('dashboard');
+//Route :: get('/dashboard/view', 'HomeController@projectsList');
 
 
 Route::get('/tube_types', 'Tubes_TypesController@select_allTubeTypes');
@@ -39,6 +39,8 @@ Route::put('calcular',[
 ]);
 
 Route::resource('projects', 'ProjectsController');
+Route::resource('tubes_types', 'Tubes_TypesController');
+Route::resource('tube', 'TubesController');
 
 //Route::get('user/profile','UserController@profile');
 //Route::post('user/update','UserController@update');

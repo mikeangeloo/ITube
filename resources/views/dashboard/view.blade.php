@@ -3,6 +3,11 @@
 @section('contenido')
 
 <div class="container">
+    @if(session()->has('status'))
+        <p class="alert alert-info">
+            {{	session()->get('status') }}
+        </p>
+    @endif
     <div class="row">
 
 
@@ -19,11 +24,6 @@
                 <div class="tab-content">
                     <div id="proyectos" class="tab-pane fade in active">
                         <div class="panel-body">
-                            @if (session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
 
                             <table class="table table-bordered">
                                 <tr>
@@ -40,15 +40,15 @@
                                         <td>{{$project['general_description']}}</td>
                                         <td>{{$project['created_at']}}</td>
                                         <td>
-                                            <a href="{{ route('projects.show',$project['id']) }}">Ver</a>
-                                            |
-                                            <a href="{{ route('projects.edit',$project['id']) }}">Editar</a>
-                                            |
-                                            <a href="{{url('projects/elimiar/'.$project['id'])}}">Eliminar</a>
-                                            |
-                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}">Exportar</a>
-                                            |
-                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}">Compartir</a>
+                                            <a href="{{ route('projects.show',$project['id']) }}"><button class="btn btn-info">Ver</button></a>
+
+                                            <a href="{{ route('projects.edit',$project['id']) }}"><button class="btn btn-warning">Editar</button></a>
+
+                                            <a href="{{url('projects/elimiar/'.$project['id'])}}"><button class="btn btn-danger">Eliminar</button></a>
+
+                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}"><button class="btn btn-primary">Exportar</button></a>
+
+                                            <a href="{{url('projects/exportarXML/'.$project['id'])}}"><button class="btn btn-success">Compartir</button></a>
 
 
                                         </td>
@@ -61,7 +61,49 @@
                     </div>
                     <div id="materiales" class="tab-pane fade">
                         <h3>Mis Materiales</h3>
-                        <p>Aquí van los materiales propios</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Material</th>
+                                <th>Cantidad</th>
+                                <th>Opciones</th>
+                            </tr>
+                            <tr>
+                                <td>Categoría Tubos</td>
+                                <td><?php echo count($tubestypes_id);  ?></td>
+                                <td>
+                                    <a href="{{route('tubes_types.create')}}"><button class="btn btn-success">Nuevo</button></a>
+                                    <a href="{{url('tubes_types')}}"><button class="btn btn-info">Ver</button></a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Tubos</td>
+                                <td><?php echo count($tubes);  ?></td>
+                                <td>
+                                    <a href="#"><button class="btn btn-success">Nuevo</button></a>
+                                    <a href="#"><button class="btn btn-info">Ver</button></a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Cables tipos</td>
+                                <td><?php echo count($cabletype_id);  ?></td>
+                                <td>
+                                    <a href="#"><button class="btn btn-success">Nuevo</button></a>
+                                    <a href="#"><button class="btn btn-info">Ver</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cables</td>
+                                <td><?php echo count($cable);  ?></td>
+                                <td>
+                                    <a href="#"><button class="btn btn-success">Nuevo</button></a>
+                                    <a href="#"><button class="btn btn-info">Ver</button></a>
+                                </td>
+                            </tr>
+
+                        </table>
+
                     </div>
                     <div id="Importar" class="tab-pane fade">
 

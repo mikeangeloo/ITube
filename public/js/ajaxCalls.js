@@ -141,7 +141,7 @@ $(document).ready(function() {
         var cable = cable_id.find(':selected').data('cablename');
         var diameter = $("#cable_diameter").val();
 
-        var area_cables = parseFloat(Math.PI*Math.pow((diameter/2),2)).toFixed(2);
+        var area_cables = parseFloat(Math.PI*Math.pow((diameter/2),2)).toFixed(3);
 
         var totalareaCables = (area_cables)*(numcables);
 

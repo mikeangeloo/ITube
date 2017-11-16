@@ -14,4 +14,13 @@ class Tubes extends Model
             ->get();
         return $_tubes;
     }
+
+    public function selectWhereUser($id){
+        $_tubes = DB::table('tubes')
+            ->join('tubes_types', 'tubes_types.id', '=', 'tubes.tubes_types_id')
+            ->select('tubes.*','tubes_types.name')
+            ->where('tubes.user_id','=', $id)
+            ->get();
+        return $_tubes;
+    }
 }

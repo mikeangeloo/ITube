@@ -36,13 +36,13 @@
 
                     <div class="col-sm12 col-xs-12">
                         <label for="nombreproyecto">Nombre de proyecto:</label>
-                        <input type="text" name="nombreproyecto" id="nombreproyecto" value="<?php echo $result[0]["name_project"];?>">
+                        <input type="text" readonly name="nombreproyecto" id="nombreproyecto" value="<?php echo $result[0]["name_project"];?>">
 
                     </div>
                     <div class="col-sm12 col-xs-12">
                         <br>
                         <label for="descripcionproyecto">Descripción:</label>
-                        <input type="text" name="descripcionproyecto" id="descripcionproyecto" value="<?php echo $result[0]["general_description"];?>">
+                        <input type="text" readonly name="descripcionproyecto" id="descripcionproyecto" value="<?php echo $result[0]["general_description"];?>">
                         <hr class="conjunto3">
                     </div>
 
