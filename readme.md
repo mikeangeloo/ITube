@@ -1,4 +1,4 @@
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/63/IMG_%28business%29.svg/1200px-IMG_%28business%29.svg.png" alt="Logo ITube">
+<img src="https://github.com/mikeangeloo/ITube/blob/master/public/storage/logoItube.png" alt="Logo ITube">
 
 <h3 style="text-align: center;">Aplicación web para canalizaciones de cableado eléctrico, par trenzado, coaxial y fibra óptica, basados en la norma oficial mexicana NOM-001-SEDE-2012</h3>
 <p style="text-align: right"><img style="width: 100px; height: auto; border-radius: 50px" src="../ITube/public/storage/nom.png" alt="Logo NOM">
